@@ -25,10 +25,10 @@ public class Main {
                     ShowParkedVehicles();
                     break;
                 case 3:
-                    //SearchVehicle();
+                    SearchVehicle();
                     break;
                 case 4:
-                    //RemoveVehicle();
+                    RemoveVehicle();
                     break;
                 case 5:
                     break;
@@ -90,9 +90,71 @@ public class Main {
 
     public static void ShowParkedVehicles()
     {
+        if(parkedVehicles.isEmpty())
+        {
+            System.out.println("Det finns inga parkerade fordon.");
+            return;
+        }
+
+        System.out.println("--- Parkerade fordon ---");
+        System.out.println("");
         for(Vehicle vehicle : parkedVehicles)
         {
-            System.out.printf("%s - %s - %d timmar - %b - %d kr\n",vehicle.licensePlate, vehicle.type, vehicle.getParkingHours(), vehicle.isParkingFeePaid, vehicle.feePaid);
+
+            System.out.printf("%s - %s - %d timmar - %s - %d kr\n",vehicle.licensePlate, vehicle.getFormattedType(),
+                    vehicle.getParkingHours(), vehicle.getFormattedisParkingFeePaid(), vehicle.feePaid);
+
+        }
+        System.out.println("");
+        System.out.println("--- Slut på lista ---");
+    }
+
+    public static void SearchVehicle()
+    {
+        String searchString;
+        boolean fordonHittat = false;
+        searchString = InputReader.readString("Ange registrerings nummer");
+
+        for(Vehicle vehicle : parkedVehicles)
+        {
+            if(vehicle.licensePlate.equalsIgnoreCase(searchString))
+            {
+                System.out.println("Fordonet finns parkerat!");
+                System.out.println("");
+                System.out.printf("%s - %s - %d timmar - %s - %d kr\n",vehicle.licensePlate, vehicle.getFormattedType(),
+                        vehicle.getParkingHours(), vehicle.getFormattedisParkingFeePaid(), vehicle.feePaid);
+                System.out.println("");
+                fordonHittat = true;
+                break;
+            }
+        }
+
+        if(!fordonHittat)
+        {
+            System.out.println("Kunde inte hitta fordonet!");
+        }
+    }
+
+    public static void RemoveVehicle()
+    {
+        String searchString;
+        boolean fordonHittat = false;
+        searchString = InputReader.readString("Ange registrerings nummer att ta bort");
+
+        for(Vehicle vehicle : parkedVehicles)
+        {
+            if(vehicle.licensePlate.equalsIgnoreCase(searchString))
+            {
+                parkedVehicles.remove(vehicle);
+                System.out.println("Fordonet borttaget!");
+                fordonHittat = true;
+                break;
+            }
+        }
+
+        if(!fordonHittat)
+        {
+            System.out.println("Kunde inte hitta fordonet!");
         }
     }
 }
@@ -141,6 +203,29 @@ class Vehicle {
             return 0;
         }
 
+    }
+
+    String getFormattedType ()
+    {
+        if(type == vehicleType.CAR)
+        {
+            return "Bil";
+        }
+
+        if(type == vehicleType.MOTORCYCLE)
+        {
+            return "Motorcyckel";
+        }
+        return "okänd";
+    }
+
+    String getFormattedisParkingFeePaid()
+    {
+        if(isParkingFeePaid)
+        {
+            return "Betald";
+        }
+        return "Ej Betald";
     }
 
 

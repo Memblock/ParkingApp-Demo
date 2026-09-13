@@ -16,9 +16,9 @@ På så sätt tränar projektet inte bara programmering, utan även förmågan a
 
 # Funktioner
 
-- Parkera fordon -IMPLEMENTERAT
-- Visa parkerade fordon -DELVIS IMPLEMENTERAT
+- Parkera fordon -IMPLEMENTERAT (TODO: Förhindra att samma fordon kan parkeras flera gånger)
+- Visa parkerade fordon -IMPLEMENTERAT
 - Sök fordon - EJ IMPLEMENTERAT
 - Ta bort fordon - EJ IMPLEMENTERAT
 
-README.md senast uppdaterad: 2026-09-12
+README.md senast uppdaterad: 2026-09-13
