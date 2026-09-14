@@ -1,8 +1,5 @@
 import java.util.ArrayList;
 
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static int menuSelection = 0;
     public static ArrayList<Vehicle> parkedVehicles = new ArrayList<Vehicle>();
@@ -48,21 +45,46 @@ public class Main {
 
     public static void ParkVehicle() {
         Vehicle vehicle = new Vehicle();
-        while(vehicle.type == Vehicle.vehicleType.UNDEFINED) {
+        while (vehicle.type == Vehicle.vehicleType.UNDEFINED) {
             menuSelection = 0;
             menuSelection = InputReader.readInt("Fordonstyp? (1. BIL 2. MOTORCYKEL)");
-            if(menuSelection == 1)
-            {
+            if (menuSelection == 1) {
                 vehicle.type = Vehicle.vehicleType.CAR;
             }
-            if(menuSelection == 2)
-            {
+            if (menuSelection == 2) {
                 vehicle.type = Vehicle.vehicleType.MOTORCYCLE;
             }
         }
-        vehicle.licensePlate = InputReader.readString("Regnummer?");
 
-        while(!vehicle.setParkingHours(InputReader.readInt("Parkeringstid? (Ange hela timmar)")))
+        String temporary = "";
+        boolean alreadyParked;
+        boolean inValidLicensePlate;
+
+        //Check if licensePlate is valid
+        do {
+            inValidLicensePlate = false;
+            temporary = InputReader.readString("Regnummer?");
+            if(temporary.isBlank() || temporary.length() < 6) {
+                System.out.println("Ange ett giltig registreringsnummer.");
+                inValidLicensePlate = true;
+            }
+
+
+        //Check if vehicle is already parked
+
+            alreadyParked = false;
+
+            for (Vehicle car : parkedVehicles) {
+                if (car.licensePlate.equalsIgnoreCase(temporary)) {
+                    System.out.println("Fordonet finns redan parkerat!");
+                    alreadyParked = true;
+                    break;
+                }
+            }
+        } while (inValidLicensePlate || alreadyParked);
+        vehicle.licensePlate = temporary;
+
+        while(!vehicle.setParkingHours(InputReader.readInt("Parkeringstid? (Ange hela timmar MAX 24 timmar)")))
         {
 
         }

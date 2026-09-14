@@ -16,9 +16,9 @@ På så sätt tränar projektet inte bara programmering, utan även förmågan a
 
 # Funktioner
 
-- Parkera fordon -IMPLEMENTERAT (TODO: Förhindra att samma fordon kan parkeras flera gånger)
+- Parkera fordon -IMPLEMENTERAT 
 - Visa parkerade fordon -IMPLEMENTERAT
 - Sök fordon -IMPLEMENTERAT
 - Ta bort fordon -IMPLEMENTERAT
 
-README.md senast uppdaterad: 2026-09-13
+README.md senast uppdaterad: 2026-09-14
